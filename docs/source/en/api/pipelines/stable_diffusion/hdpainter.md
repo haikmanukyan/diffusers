@@ -32,6 +32,7 @@ You can find additional information about Text2Video-Zero on the [project page](
 
 ```python
 
+import torch
 from diffusers import StableDiffusionHDPainterPipeline, DDIMScheduler
 from diffusers.utils import load_image, make_image_grid
 

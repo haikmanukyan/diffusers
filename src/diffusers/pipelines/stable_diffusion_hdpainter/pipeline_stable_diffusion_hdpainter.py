@@ -7,7 +7,7 @@ import numbers
 import numpy as np
 from typing import Optional, Union, Tuple, List, Dict, Any, Callable
 
-from diffusers.models.attention_processor import Attention, USE_PEFT_BACKEND
+from diffusers.models.attention_processor import Attention
 from diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion_inpaint import StableDiffusionInpaintPipeline, retrieve_timesteps
 from diffusers.image_processor import PipelineImageInput, VaeImageProcessor
 from diffusers.models import AsymmetricAutoencoderKL, AutoencoderKL, ImageProjection, UNet2DConditionModel
@@ -58,15 +58,15 @@ class RASGAttnProcessor:
         if attn.group_norm is not None:
             hidden_states = attn.group_norm(hidden_states.transpose(1, 2)).transpose(1, 2)
 
-        query = attn.to_q(hidden_states, *args)
+        query = attn.to_q(hidden_states)
 
         if encoder_hidden_states is None:
             encoder_hidden_states = hidden_states
         elif attn.norm_cross:
             encoder_hidden_states = attn.norm_encoder_hidden_states(encoder_hidden_states)
 
-        key = attn.to_k(encoder_hidden_states, *args)
-        value = attn.to_v(encoder_hidden_states, *args)
+        key = attn.to_k(encoder_hidden_states)
+        value = attn.to_v(encoder_hidden_states)
 
         query = attn.head_to_batch_dim(query)
         key = attn.head_to_batch_dim(key)
@@ -85,7 +85,7 @@ class RASGAttnProcessor:
         hidden_states = attn.batch_to_head_dim(hidden_states)
 
         # linear proj
-        hidden_states = attn.to_out[0](hidden_states, *args)
+        hidden_states = attn.to_out[0](hidden_states)
         # dropout
         hidden_states = attn.to_out[1](hidden_states)
 
@@ -160,15 +160,15 @@ class PAIntAAttnProcessor:
         if attn.group_norm is not None:
             hidden_states = attn.group_norm(hidden_states.transpose(1, 2)).transpose(1, 2)
 
-        query = attn.to_q(hidden_states, *args)
+        query = attn.to_q(hidden_states)
 
         if encoder_hidden_states is None:
             encoder_hidden_states = hidden_states
         elif attn.norm_cross:
             encoder_hidden_states = attn.norm_encoder_hidden_states(encoder_hidden_states)
 
-        key = attn.to_k(encoder_hidden_states, *args)
-        value = attn.to_v(encoder_hidden_states, *args)
+        key = attn.to_k(encoder_hidden_states)
+        value = attn.to_v(encoder_hidden_states)
 
         query = attn.head_to_batch_dim(query)
         key = attn.head_to_batch_dim(key)
@@ -183,7 +183,7 @@ class PAIntAAttnProcessor:
         hidden_states = attn.batch_to_head_dim(hidden_states)
 
         # linear proj
-        hidden_states = attn.to_out[0](hidden_states, *args)
+        hidden_states = attn.to_out[0](hidden_states)
         # dropout
         hidden_states = attn.to_out[1](hidden_states)
 
@@ -289,12 +289,12 @@ class PAIntAAttnProcessor:
         if attn2.group_norm is not None:
             cross_attention_hidden_states = attn2.group_norm(cross_attention_hidden_states.transpose(1, 2)).transpose(1, 2)
 
-        query2 = attn2.to_q(cross_attention_hidden_states, *args)
+        query2 = attn2.to_q(cross_attention_hidden_states)
 
         if attn2.norm_cross:
             cross_attention_encoder_hidden_states = attn2.norm_encoder_hidden_states(cross_attention_encoder_hidden_states)
 
-        key2 = attn2.to_k(cross_attention_encoder_hidden_states, *args)
+        key2 = attn2.to_k(cross_attention_encoder_hidden_states)
         query2 = attn2.head_to_batch_dim(query2)
         key2 = attn2.head_to_batch_dim(key2)
 
@@ -360,7 +360,7 @@ class PAIntAAttnProcessor:
         hidden_states = attn.batch_to_head_dim(hidden_states)
 
         # linear proj
-        hidden_states = attn.to_out[0](hidden_states, *args)
+        hidden_states = attn.to_out[0](hidden_states)
         # dropout
         hidden_states = attn.to_out[1](hidden_states)
 
