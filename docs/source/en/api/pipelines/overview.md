@@ -50,6 +50,7 @@ The table below lists all the pipelines currently available in 🤗 Diffusers an
 | [DiffEdit](diffedit) | inpainting |
 | [DiT](dit) | text2image |
 | [GLIGEN](stable_diffusion/gligen) | text2image |
+| [HD-Painter](stable_diffusion/hdpainter) | text2image |
 | [InstructPix2Pix](pix2pix) | image editing |
 | [Kandinsky 2.1](kandinsky) | text2image, image2image, inpainting, interpolation |
 | [Kandinsky 2.2](kandinsky_v22) | text2image, image2image, inpainting |

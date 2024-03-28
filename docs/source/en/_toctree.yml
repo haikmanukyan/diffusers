@@ -361,6 +361,8 @@
         title: Stable Diffusion T2I-Adapter
       - local: api/pipelines/stable_diffusion/gligen
         title: GLIGEN (Grounded Language-to-Image Generation)
+      - local: api/pipelines/stable_diffusion/hdpainter
+        title: HD-Painter
       title: Stable Diffusion
     - local: api/pipelines/stable_unclip
       title: Stable unCLIP

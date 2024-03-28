@@ -212,6 +212,7 @@ else:
         "StableDiffusionGLIGENPipeline",
         "StableDiffusionGLIGENTextImagePipeline",
     ]
+    _import_structure["stable_diffusion_hdpainter"] = ["StableDiffusionHDPainterPipeline"]
     _import_structure["stable_video_diffusion"] = ["StableVideoDiffusionPipeline"]
     _import_structure["stable_diffusion_xl"].extend(
         [

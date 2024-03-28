@@ -274,6 +274,7 @@ else:
             "StableDiffusionDiffEditPipeline",
             "StableDiffusionGLIGENPipeline",
             "StableDiffusionGLIGENTextImagePipeline",
+            "StableDiffusionHDPainterPipeline",
             "StableDiffusionImageVariationPipeline",
             "StableDiffusionImg2ImgPipeline",
             "StableDiffusionInpaintPipeline",
